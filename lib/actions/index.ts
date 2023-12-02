@@ -35,7 +35,6 @@ export async function scrapeAndStoreProduct(productUrl: string) {
                 averagePrice: getAveragePrice(updatedPriceHistory),
             }
         }
-
         const newProduct = await Product.findOneAndUpdate(
             { url: scrapedProduct.url },
             product,
@@ -70,6 +69,25 @@ export async function getAllProducts(): Promise<ProductType[] | undefined> {
         const products = await Product.find();
 
         return products;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getSimilarProducts(productId : string): Promise<ProductType[] | undefined> {
+    try {
+        connectToDB();
+
+        const currentProduct = await Product.findById(productId);
+
+        if(!currentProduct) return undefined;
+
+        const similarProducts = await Product.find({
+            _id: {$ne : productId},
+
+        }).limit(3);
+
+        return similarProducts;
     } catch (error) {
         console.log(error)
     }

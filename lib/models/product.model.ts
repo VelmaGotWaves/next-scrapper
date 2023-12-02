@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema({
     isOutOfStock: { type: String },
     users: {
         type: [{
-            email: { type: String, required: true, unique: true }
+            email: { type: String, required: true }
         }],
         default: []
     },
