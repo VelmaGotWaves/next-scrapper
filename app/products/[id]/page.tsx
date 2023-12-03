@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { formatNumber } from '../../../lib/utils'
 import PriceInfoCard from '../../../components/PriceInfoCard'
 import ProductCard from '../../../components/ProductCard'
+import Modal from '../../../components/Modal'
 
 type Props = {
   params: { id: string }
@@ -140,7 +141,7 @@ async function ProductDetails({ params: { id } }: Props) {
               />
             </div>
           </div>
-          MODAL
+          <Modal productId={id} />
         </div>
       </div>
 
